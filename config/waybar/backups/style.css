@@ -1,0 +1,134 @@
+@import "colors.css";
+
+* {
+    font-family: "Iosevka Nerd Font", "Font Awesome 6 Free", monospace;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+window#waybar {
+    background-color: @surface;
+    color: @on_surface;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+/* ============================================================
+ *  LEFT MODULES (The Split "Two-Tone" Look)
+ *  ============================================================ */
+
+/* Remove default margins for left modules so they touch */
+.modules-left > widget > label {
+    margin: 5px 0;
+    padding: 0 12px;
+    border-radius: 0;
+}
+
+/* --- MENU (Teal + Dark) --- */
+#custom-menu_icon {
+background-color: @primary;
+color: @on_primary;
+border-radius: 4px 0px 0px 4px; /* Round Left */
+margin-left: 5px;
+}
+
+#custom-menu_label {
+background-color: @surface_container_highest;
+color: @on_surface;
+border-radius: 0px 4px 4px 0px; /* Round Right */
+margin-right: 10px; /* Gap after the block */
+}
+
+/* --- SHORTCUTS (Pink + Grey + Dark) --- */
+#custom-term_icon {
+background-color: @tertiary; /* Pink/Red pop color */
+color: @on_tertiary;
+border-radius: 4px 0px 0px 4px;
+}
+
+#custom-web_icon {
+background-color: @outline; /* Greyish */
+color: @surface;
+border-radius: 0px; /* Square middle piece */
+}
+
+/* The Group (Files/Editor) */
+#group-apps {
+background-color: @surface_container_highest;
+border-radius: 0px 4px 4px 0px;
+margin: 5px 10px 5px 0;
+}
+
+#group-apps label {
+margin: 0;
+padding: 0 8px;
+background-color: transparent;
+color: @on_surface;
+}
+
+/* --- MUSIC (Red + Dark) --- */
+#custom-music_icon {
+background-color: @error; /* Often red */
+color: @on_error;
+border-radius: 4px 0px 0px 4px;
+}
+
+#custom-music_label {
+background-color: @surface_container_highest;
+color: @on_surface;
+border-radius: 0px 4px 4px 0px;
+}
+
+
+/* ============================================================
+ *  RIGHT MODULES (Standard "Bubble" Look)
+ *  ============================================================ */
+
+.modules-right > widget > * {
+    background-color: @secondary_container;
+    color: @on_secondary_container;
+    margin: 5px 3px;
+    padding: 0px 10px;
+    border-radius: 4px;
+}
+
+/* Specific Right Module Colors (from your old file) */
+#custom-style_switcher {
+background-color: @tertiary;
+color: @on_tertiary;
+}
+
+#pulseaudio {
+background-color: @primary;
+color: @on_primary;
+}
+
+#battery {
+background-color: @secondary;
+color: @on_secondary;
+}
+
+#battery.charging {
+background-color: @tertiary;
+}
+
+#network {
+background-color: @error;
+color: @on_error;
+}
+
+#clock {
+background-color: @primary_container;
+color: @on_primary_container;
+}
+
+#custom-power {
+background-color: @inverse_primary;
+color: @inverse_on_primary;
+margin-right: 5px;
+}
+
+#window {
+background-color: transparent;
+color: @on_surface;
+}

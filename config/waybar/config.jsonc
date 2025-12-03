@@ -1,0 +1,201 @@
+{
+  "layer": "top",
+  "position": "top",
+  "mod": "dock",
+  "exclusive": true,
+  "passthrough": false,
+  "gtk-layer-shell": true,
+  "height": 36,
+  "spacing": 0, // IMPORTANT: Removes gaps so blocks can touch
+
+  "modules-left": [
+    // --- MENU SPLIT ---
+    "custom/menu_icon",
+    "custom/menu_label",
+
+    // --- SHORTCUTS SPLIT (Pink > Grey > Dark Group) ---
+    "custom/term_icon",
+    "custom/web_icon",
+    "custom/file_icon", // Contains Files, Editor, Gallery
+
+    // --- MUSIC SPLIT ---
+    "custom/music_icon",
+    "custom/music_label",
+    "cava",
+  ],
+  "modules-center": ["hyprland/window"],
+  "modules-right": [
+    "hyprland/workspaces",
+    "custom/style_switcher",
+    "pulseaudio",
+    "battery",
+    "network",
+    "clock",
+    "custom/power",
+  ],
+
+  // ===========================================================
+  // LEFT MODULES (SPLIT LOGIC)
+  // ===========================================================
+
+  // 1. MENU
+  "custom/menu_icon": {
+    "format": "󰣇",
+    "on-click": "wofi --show drun",
+    "tooltip": false,
+  },
+  "custom/menu_label": {
+    "format": "Menu",
+    "on-click": "wofi --show drun",
+    "tooltip": false,
+  },
+
+  // 2. SHORTCUTS
+  "custom/term_icon": {
+    "format": ">_",
+    "on-click": "alacritty",
+    "tooltip": "Terminal",
+  },
+  "custom/web_icon": {
+    "format": "",
+    "on-click": "firefox",
+    "tooltip": "Web",
+  },
+
+  "custom/file_icon": {
+    "format": "",
+    "on-click": "dolphin",
+    "tooltip": "Files",
+  },
+
+  // 3. MUSIC
+  "custom/music_icon": {
+    "format": "",
+    "on-click": "playerctl play-pause",
+    "tooltip": false,
+  },
+  "custom/music_label": {
+    "format": "{}",
+    // CHANGED: Use playerctl directly to fetch artist and title
+    "exec": "playerctl metadata --format '{{artist}} - {{title}}' 2> /dev/null",
+    "interval": 2, // Check for updates every 2 seconds
+    "max-length": 30,
+
+    // NEW: Use 'format-if' to display a static message when playerctl fails (no player running)
+    "format-if": {
+      "text": "󰎊 No Music Playing",
+      "else": "{}",
+    },
+
+    "on-click": "playerctl play-pause",
+  },
+  /*"cava": {
+    // "cava_config": "$XDG_CONFIG_HOME/cava/cava.conf",
+    "framerate": 24,
+    "autosens": 1,
+    "sensitivity": 2,
+    "bars": 14,
+    "lower_cutoff_freq": 50,
+    "higher_cutoff_freq": 10000,
+    "hide_on_silence": false,
+    // "format_silent": "quiet",
+    "method": "pulse",
+    "source": "auto",
+    "stereo": true,
+    "reverse": false,
+    "bar_delimiter": 0,
+    "monstercat": false,
+    "waves": false,
+    "noise_reduction": 0.77,
+    "input_delay": 2,
+    "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+    // CRITICAL FIX: Add empty scroll actions to prevent crashes/segfaults
+    "on-scroll-up": "",
+    "on-scroll-down": "",
+    "actions": {
+      "on-click-right": "mode",
+    },
+  },*/
+  "hyprland/workspaces": {
+    "disable-scroll": false,
+    "all-outputs": true,
+    "format": "{icon}",
+    "format-icons": {
+      "1": "一", // ICHI (One)
+      "2": "二", // NI (Two)
+      "3": "三", // SAN (Three)
+      "4": "四", // SHI/YON (Four)
+      "5": "五", // GO (Five)
+      "default": "六", // ROKU (Six) - Used for any workspace above 5
+    },
+    "sort-by-number": true,
+    "persistent-workspaces": {
+      "1": [],
+      "2": [],
+      "3": [],
+      "4": [],
+      "5": [],
+    },
+  },
+
+  // ===========================================================
+  // CENTER & RIGHT MODULES (Standard)
+  // ===========================================================
+
+  "hyprland/window": {
+    "format": "{}",
+    "max-length": 50,
+  },
+
+  "custom/style_switcher": {
+    "format": " Style",
+    "on-click": "~/.config/hypr/scripts/wallpaper_switcher.sh",
+    "tooltip": "Change Wallpaper/Theme",
+  },
+
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-bluetooth": "{icon} {volume}%",
+    "format-muted": " Muted",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["", "", ""],
+    },
+    "scroll-step": 1,
+    "on-click": "pavucontrol",
+  },
+
+  "battery": {
+    "states": { "good": 95, "warning": 30, "critical": 15 },
+    "format": "{icon} {capacity}%",
+    "format-charging": " {capacity}%",
+    "format-plugged": " {capacity}%",
+    "format-icons": ["", "", "", "", ""],
+  },
+
+  "network": {
+    "format-wifi": " {essid}",
+    "format-ethernet": " Wired",
+    "tooltip-format": "{ifname} via {gwaddr}",
+    "format-linked": "{ifname} (No IP)",
+    "format-disconnected": "⚠ Disconnected",
+    "format-alt": "{ifname}: {ipaddr}/{cidr}",
+  },
+
+  "clock": {
+    "format": " {:%I:%M %p}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format-alt": " {:%Y-%m-%d}",
+  },
+
+  "custom/power": {
+    "format": " System",
+    "on-click": "wlogout",
+    "tooltip": false,
+  },
+}

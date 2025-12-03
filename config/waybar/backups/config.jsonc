@@ -1,0 +1,148 @@
+{
+    "layer": "top",
+    "position": "top",
+    "mod": "dock",
+    "exclusive": true,
+    "passthrough": false,
+    "gtk-layer-shell": true,
+    "height": 36,
+    "spacing": 0, // IMPORTANT: Removes gaps so blocks can touch
+
+    "modules-left": [
+        // --- MENU SPLIT ---
+        "custom/menu_icon",
+        "custom/menu_label",
+
+        // --- SHORTCUTS SPLIT (Pink > Grey > Dark Group) ---
+        "custom/term_icon",
+        "custom/web_icon",
+        "group/apps", // Contains Files, Editor, Gallery
+
+        // --- MUSIC SPLIT ---
+        "custom/music_icon",
+        "custom/music_label"
+    ],
+    "modules-center": [
+        "hyprland/window"
+    ],
+    "modules-right": [
+        "custom/style_switcher",
+        "pulseaudio",
+        "battery",
+        "network",
+        "clock",
+        "custom/power"
+    ],
+
+    // ===========================================================
+    // LEFT MODULES (SPLIT LOGIC)
+    // ===========================================================
+
+    // 1. MENU
+    "custom/menu_icon": {
+        "format": "󰣇",
+        "on-click": "wofi --show drun",
+        "tooltip": false
+    },
+    "custom/menu_label": {
+        "format": "Menu",
+        "on-click": "wofi --show drun",
+        "tooltip": false
+    },
+
+    // 2. SHORTCUTS
+    "custom/term_icon": {
+        "format": ">_",
+        "on-click": "alacritty",
+        "tooltip": "Terminal"
+    },
+    "custom/web_icon": {
+        "format": "",
+        "on-click": "firefox",
+        "tooltip": "Web"
+    },
+
+    // The dark box group for other apps
+    "group/apps": {
+        "orientation": "horizontal",
+        "modules": ["custom/files", "custom/editor"]
+    },
+    "custom/files": { "format": "", "on-click": "thunar", "tooltip": "Files" },
+    "custom/editor": { "format": "", "on-click": "geany", "tooltip": "Editor" },
+
+    // 3. MUSIC
+    "custom/music_icon": {
+        "format": "",
+        "on-click": "playerctl play-pause",
+        "tooltip": false
+    },
+    "custom/music_label": {
+        "format": "{}",
+        "return-type": "json",
+        "max-length": 30,
+        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null",
+        // OR if you lack the script: "exec": "playerctl metadata --format '{{artist}} - {{title}}'",
+        "on-click": "playerctl play-pause"
+    },
+
+    // ===========================================================
+    // CENTER & RIGHT MODULES (Standard)
+    // ===========================================================
+
+    "hyprland/window": {
+        "format": "{}",
+        "max-length": 50
+    },
+
+    "custom/style_switcher": {
+        "format": " Style",
+        "on-click": "~/.config/hypr/scripts/wallpaper_switcher.sh",
+        "tooltip": "Change Wallpaper/Theme"
+    },
+
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "{icon} {volume}%",
+        "format-muted": " Muted",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "scroll-step": 1,
+        "on-click": "pavucontrol"
+    },
+
+    "battery": {
+        "states": { "good": 95, "warning": 30, "critical": 15 },
+        "format": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-icons": ["", "", "", "", ""]
+    },
+
+    "network": {
+        "format-wifi": " {essid}",
+        "format-ethernet": " Wired",
+        "tooltip-format": "{ifname} via {gwaddr}",
+        "format-linked": "{ifname} (No IP)",
+        "format-disconnected": "⚠ Disconnected",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+
+    "clock": {
+        "format": " {:%I:%M %p}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": " {:%Y-%m-%d}"
+    },
+
+    "custom/power": {
+        "format": " System",
+        "on-click": "wlogout",
+        "tooltip": false
+    }
+}
