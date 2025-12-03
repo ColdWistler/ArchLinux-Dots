@@ -1,0 +1,53 @@
+[config]
+# "swww" is a popular wallpaper daemon for Hyprland.
+# If you use something else (like swaybg or hyprpaper), change "swww" to that command.
+# If you only want colors and don't want Matugen to change the wallpaper, set set = false.
+[config.wallpaper]
+command = "swww"
+arguments = ["img", "--transition-type", "center"]
+set = true
+
+# =============================================================================
+# TEMPLATES
+# These tell Matugen: "Take this input file, fill it with colors,
+# save it here, and then run this command."
+# =============================================================================
+
+[templates.waybar]
+input_path = "~/.config/waybar/colors-template.css"
+output_path = "~/.config/waybar/colors.css"
+# This command reloads Waybar automatically after colors are generated
+post_hook = "pkill -SIGUSR2 waybar"
+
+# You can add other apps here later (like Alacritty, Hyprland borders, etc.)
+# [templates.hyprland]
+# input_path = "~/.config/hypr/colors-template.conf"
+# output_path = "~/.config/hypr/colors.conf"
+# --- NEW ROFI TEMPLATE ---
+[templates.rofi]
+input_path = "~/.config/rofi/themes/rofi-template.rasi"
+output_path = "~/.config/rofi/themes/matugen.rasi"
+# Note: Rofi usually loads the new theme on the next execution.
+# A post_hook is not necessary here.
+
+# You can add other apps here later (like Alacritty, Hyprland borders, etc.)
+# [templates.hyprland]
+# input_path = "~/.config/hypr/colors-template.conf"
+# output_path = "~/.config/hypr/colors.conf"
+
+# --- KITTY TERMINAL TEMPLATE ---
+[templates.kitty]
+# You will need to ensure this path points to your Kitty template file.
+# This path assumes you have the template stored under ~/.config/matugen/templates/
+input_path = "~/.config/matugen/templates/kitty-colors.conf"
+output_path = "~/.config/kitty/matugen-colors.conf"
+# This command reloads all running Kitty instances.
+post_hook = "pkill -SIGUSR1 kitty"
+
+[templates.hyprland]
+input_path = "~/.config/matugen/templates/hyprland-colors.conf"
+output_path = "~/.config/hypr/colors.conf"
+
+[templates.zed]
+input_path = '~/.config/matugen/templates/zed-colors.json'
+output_path = '~/.config/zed/themes/matugen.json'
