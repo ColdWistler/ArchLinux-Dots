@@ -2,5 +2,18 @@
 By Backup COnfig
 
 ```bash
-git clone 
+paru -Syyu hyprland waybar rofi
+```
+
+```bash
+git clone https://github.com/ColdWistler/ArchLinux-Dots.git
+```
+```bash
+cd ArchLinux-Dots
+```
+
+```bash
+cp -r hypr ~/.config/hypr
+cp -r rofi ~/.config/rofi
+cp -r rofi ~/.config/waybar
 ```
