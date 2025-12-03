@@ -2,5 +2,5 @@
 By Backup COnfig
 
 ```bash
-$ git clone 
+git clone 
 ```
